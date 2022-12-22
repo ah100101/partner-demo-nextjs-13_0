@@ -1,11 +1,14 @@
+import simulateSynchronousWork from "./simulate-synchronous-work";
+
 export type Product = {
   Id: number;
   Name: string;
   Price: number;
   Description: string;
+  LastUpdated?: Date;
 };
 
-const products: Product[] = [
+export const mockProducts: Product[] = [
   {
     Id: 1,
     Name: "Vercel T-Shirt - Men's",
@@ -44,4 +47,8 @@ const products: Product[] = [
   },
 ];
 
-export default products;
+// simulated call to fetch products
+export const getProducts = async () => {
+  await simulateSynchronousWork();
+  return mockProducts.map((p) => ({ ...p, LastUpdated: new Date() }));
+};

@@ -1,4 +1,4 @@
-import { mockProducts } from "lib/mocks/products";
+import { getProducts } from "lib/mocks/products";
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
@@ -6,7 +6,8 @@ export const config = {
 };
 
 const products = async (req: NextRequest) => {
-  return NextResponse.json(mockProducts);
+  const products = await getProducts();
+  return NextResponse.json(products);
 };
 
 export default products;
