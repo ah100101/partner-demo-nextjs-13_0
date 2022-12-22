@@ -7,7 +7,7 @@ export const config = {
 
 const products = async (req: NextRequest) => {
   const products = await getProducts();
-  // cache-control > browser should not cache, edge cache for 5 seconds
+  // cache-control > browser should not cache, edge cache for 10 seconds
   return NextResponse.json(products, {
     status: 200,
     headers: {
