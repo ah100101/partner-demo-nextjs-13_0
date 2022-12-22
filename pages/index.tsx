@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import { GetStaticProps, NextPage } from "next/types";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next/types";
 import { blogFeatureFlagEnabled } from "../lib/edge-config";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -11,13 +11,12 @@ type Props = {
   showBlogCard: boolean;
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const showBlogCard = await blogFeatureFlagEnabled();
   return {
     props: {
       showBlogCard,
     },
-    revalidate: 1,
   };
 };
 
