@@ -2,10 +2,26 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
+import { GetStaticProps, NextPage } from "next/types";
+import { blogFeatureFlagEnabled } from "../lib/edge-config";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+type Props = {
+  showBlogCard: boolean;
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const showBlogCard = await blogFeatureFlagEnabled();
+  return {
+    props: {
+      showBlogCard,
+    },
+    revalidate: 1,
+  };
+};
+
+const Home: NextPage<Props> = ({ showBlogCard }) => {
   return (
     <>
       <Head>
@@ -90,20 +106,6 @@ export default function Home() {
           </a>
 
           <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
             target="_blank"
@@ -117,8 +119,27 @@ export default function Home() {
               with&nbsp;Vercel.
             </p>
           </a>
+
+          {showBlogCard && (
+            <a
+              href="https://nextjs.org/blog"
+              className={styles.card}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h2 className={inter.className}>
+                Blog
+                <span>-&gt;</span>
+              </h2>
+              <p className={inter.className}>
+                Catch up with the latest Next.js news
+              </p>
+            </a>
+          )}
         </div>
       </main>
     </>
   );
-}
+};
+
+export default Home;
