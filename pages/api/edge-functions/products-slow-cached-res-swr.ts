@@ -11,7 +11,7 @@ const products = async (req: NextRequest) => {
   return NextResponse.json(products, {
     status: 200,
     headers: {
-      "Cache-Control": "max-age=0 s-maxage=10",
+      "Cache-Control": "max-age=0 s-maxage=10 stale-while-revalidate",
     },
   });
 };
