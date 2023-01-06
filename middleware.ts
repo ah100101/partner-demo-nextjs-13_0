@@ -19,5 +19,6 @@ export default async function middleware(
     body += decoder.decode(value);
     ({ done, value } = await reader.read());
   }
-  return NextResponse.json(body);
+  console.log({ body });
+  // return NextResponse.json(body);
 }
