@@ -34,7 +34,7 @@ const Home: NextPage<Props> = ({ showBlogCard, serverDate }) => {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <div className={styles.title}>Partner Demo</div>
+          <div className={styles.title}>Partner Demo - SSG</div>
           <p>
             <code className={styles.code}>{serverDate && `${serverDate}`}</code>
           </p>
