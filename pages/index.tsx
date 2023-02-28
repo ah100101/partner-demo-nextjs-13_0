@@ -32,7 +32,7 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <div className={styles.title}>Partner Demo v3.1</div>
+          <div className={styles.title}>Partner Demo v3.2</div>
           <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
