@@ -2,26 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import { GetStaticProps, NextPage } from "next/types";
-import { blogFeatureFlagEnabled } from "../lib/edge-config";
+import { NextPage } from "next/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
-type Props = {
-  showBlogCard: boolean;
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  const showBlogCard = await blogFeatureFlagEnabled();
-  return {
-    props: {
-      showBlogCard,
-    },
-    revalidate: 1,
-  };
-};
-
-const Home: NextPage<Props> = ({ showBlogCard }) => {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -32,11 +17,9 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <div className={styles.title}>Partner Demo v3.5</div>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
+          <div className={styles.title}>
+            Partner Demo - <strong>Beta</strong>
+          </div>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -59,7 +42,7 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
         <div className={styles.center}>
           <Image
             className={styles.logo}
-            src="/next.svg"
+            src="/next-red.svg"
             alt="Next.js Logo"
             width={180}
             height={37}
@@ -67,7 +50,7 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
           />
           <div className={styles.thirteen}>
             <Image
-              src="/thirteen.svg"
+              src="/thirteen-red.svg"
               alt="13"
               width={40}
               height={31}
@@ -113,20 +96,17 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
               with&nbsp;Vercel.
             </p>
           </a>
-
-          {showBlogCard && (
-            <a
-              href="https://nextjs.org/blog"
-              className={styles.card}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2 className={inter.className}>Blog</h2>
-              <p className={inter.className}>
-                Catch up with the latest Next.js news
-              </p>
-            </a>
-          )}
+          <a
+            href="https://nextjs.org/blog"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>Blog</h2>
+            <p className={inter.className}>
+              Catch up with the latest Next.js news
+            </p>
+          </a>
         </div>
       </main>
     </>

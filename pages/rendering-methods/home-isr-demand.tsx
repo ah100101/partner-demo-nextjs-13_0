@@ -1,27 +1,30 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import { GetStaticProps, NextPage } from "next/types";
-import { blogFeatureFlagEnabled } from "../lib/edge-config";
+import { blogFeatureFlagEnabled } from "../../lib/edge-config";
 
 const inter = Inter({ subsets: ["latin"] });
 
 type Props = {
   showBlogCard: boolean;
+  serverDate: string;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   const showBlogCard = await blogFeatureFlagEnabled();
+  const serverDate = new Date().toString();
   return {
     props: {
       showBlogCard,
+      serverDate,
     },
-    revalidate: 1,
+    revalidate: 3600,
   };
 };
 
-const Home: NextPage<Props> = ({ showBlogCard }) => {
+const Home: NextPage<Props> = ({ showBlogCard, serverDate }) => {
   return (
     <>
       <Head>
@@ -32,10 +35,9 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <div className={styles.title}>Partner Demo v3.5</div>
+          <div className={styles.title}>Partner Demo - ISR - On Demand</div>
           <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
+            <code className={styles.code}>{serverDate && `${serverDate}`}</code>
           </p>
           <div>
             <a
@@ -83,7 +85,9 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>Docs</h2>
+            <h2 className={inter.className}>
+              Docs <span>-&gt;</span>
+            </h2>
             <p className={inter.className}>
               Find in-depth information about Next.js features and&nbsp;API.
             </p>
@@ -95,7 +99,9 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>Learn</h2>
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
             <p className={inter.className}>
               Learn about Next.js in an interactive course with&nbsp;quizzes!
             </p>
@@ -107,7 +113,9 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>Deploy</h2>
+            <h2 className={inter.className}>
+              Deploy <span>-&gt;</span>
+            </h2>
             <p className={inter.className}>
               Instantly deploy your Next.js site to a shareable URL
               with&nbsp;Vercel.
@@ -121,7 +129,10 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <h2 className={inter.className}>Blog</h2>
+              <h2 className={inter.className}>
+                Blog
+                <span>-&gt;</span>
+              </h2>
               <p className={inter.className}>
                 Catch up with the latest Next.js news
               </p>
