@@ -7,7 +7,7 @@ export const config = {
 
 const hello = async (req: NextRequest) => {
   console.log("Hello from a cron job!");
-  return NextResponse.json({ message: hello });
+  return NextResponse.json({ message: "Hello from a cron job!" });
 };
 
 export default hello;
