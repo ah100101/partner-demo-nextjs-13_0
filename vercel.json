@@ -1,15 +1,15 @@
 {
   "crons": [
     {
-      "path": "/api/cron/revalidate-minute",
+      "path": "/api/cron/hello",
       "schedule": "* * * * *"
     },
     {
-      "path": "/api/cron/revalidate-hour",
+      "path": "/api/cron/hello",
       "schedule": "* */1 * * *"
     },
     {
-      "path": "/api/cron/revalidate-day",
+      "path": "/api/cron/hello",
       "schedule": "30 3 * * *"
     }
   ]
