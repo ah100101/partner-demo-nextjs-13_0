@@ -4,6 +4,7 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import { GetStaticProps, NextPage } from "next/types";
 import { blogFeatureFlagEnabled } from "../lib/edge-config";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,8 @@ const Home: NextPage<Props> = ({ showBlogCard }) => {
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
+          <Link href="/beta">Beta</Link>
+          <Link href="https://google.com">Google</Link>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
