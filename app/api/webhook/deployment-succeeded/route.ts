@@ -14,17 +14,16 @@ export async function POST(request: Request) {
 
   const res = await request.json();
 
-  console.log({ res, headers });
+  const data = {
+    res,
+    headers,
+    user: res?.payload?.user,
+    team: res?.payload?.team,
+  };
 
-  return new Response(
-    JSON.stringify({
-      res,
-      headers,
-      user: res?.payload?.user,
-      team: res?.payload?.team,
-    }),
-    {
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+  console.log(JSON.stringify(data));
+
+  return new Response(JSON.stringify(data), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
