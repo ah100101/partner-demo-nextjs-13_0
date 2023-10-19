@@ -16,7 +16,15 @@ export async function POST(request: Request) {
 
   console.log({ res, headers });
 
-  return new Response(JSON.stringify({ res, headers }), {
-    headers: { "Content-Type": "application/json" },
-  });
+  return new Response(
+    JSON.stringify({
+      res,
+      headers,
+      user: res?.payload?.user,
+      team: res?.payload?.team,
+    }),
+    {
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 }
